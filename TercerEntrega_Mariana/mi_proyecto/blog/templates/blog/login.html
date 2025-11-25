@@ -1,0 +1,44 @@
+{% extends "blog/base.html" %}
+
+{% block title %} 
+    <h1 class="text-center display-5 fw-semibold" style="color:#254229;">
+        Iniciar Sesión 
+    </h1>
+{% endblock %}
+
+{% block content %}
+
+<div class="container d-flex justify-content-center">
+    <div class="card shadow-sm mt-5 p-4" style="max-width: 450px; width: 100%;">
+
+        <h2 class="text-center mb-4" style="color:#254229; font-weight:600;">
+            Iniciar sesión
+        </h2>
+
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                {{ form.as_p }}
+            </div>
+
+            <button class="btn w-100" 
+                    type="submit"
+                    style="background-color:#c9e8d2; color:#254229; font-weight:500;">
+                Ingresar
+            </button>
+        </form>
+
+        <div class="text-center mt-3">
+            <small class="text-muted">
+                ¿No tenés cuenta?
+                <a href="{% url 'blog:registro' %}" style="color:#254229; font-weight:500;">
+                    Registrate
+                </a>
+            </small>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

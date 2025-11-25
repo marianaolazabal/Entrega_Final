@@ -1,0 +1,30 @@
+{% extends "blog/base.html" %}
+
+{% block title %}
+    Eliminar Publicación
+{% endblock title %}
+
+{% block content_title %}
+    Confirmar Eliminación
+{% endblock content_title %}
+
+{% block content %}
+<div class="card shadow-sm border-0 mx-auto" style="max-width: 600px;">
+    <div class="card-body">
+        <p class="fs-5 text-center mb-4">
+            ¿Estás seguro de que deseas eliminar la publicación<br>
+            <strong>"{{ object.titulo }}"</strong>?
+        </p>
+
+        <form method="post" class="text-center">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger px-4 me-2">
+                Sí, eliminar
+            </button>
+            <a href="{% url 'blog:post_list' %}" class="btn btn-secondary px-4">
+                Cancelar
+            </a>
+        </form>
+    </div>
+</div>
+{% endblock content %}

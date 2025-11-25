@@ -1,0 +1,36 @@
+{% extends "blog/base.html" %}
+
+{% block title %}
+    Editar Perfil
+{% endblock title %}
+
+{% block content_title %}
+    <h2 class="text-center" style="color:#254229; font-weight:600;">
+        Editar perfil
+    </h2>
+{% endblock content_title %}
+
+{% block content %}
+
+<div class="container d-flex justify-content-center">
+    <div class="card shadow-sm mt-4 p-4" style="max-width: 550px; width: 100%;">
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                {{ form.as_p }}
+                {{ avatar_form.as_p }}
+            </div>
+
+            <button type="submit"
+                    class="btn w-100"
+                    style="background-color:#c9e8d2; color:#254229; font-weight:500;">
+                Guardar cambios
+            </button>
+        </form>
+
+    </div>
+</div>
+
+{% endblock content %}

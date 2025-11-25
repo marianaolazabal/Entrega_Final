@@ -1,0 +1,78 @@
+{% extends "blog/base.html" %}
+{% load static %}
+
+{% block title %}
+    Inicio
+{% endblock title %}
+
+{% block content_title %}
+    <h1 class="text-center display-5 fw-semibold" style="color:#254229;">
+        Blog de vinilos
+    </h1>
+{% endblock content_title %}
+
+
+{% block content %}
+
+{% if not user.is_authenticated %}
+
+<div class="container text-center py-5">
+
+    <p class="mt-4 fs-5 text-secondary">
+        Para continuar, iniciá sesión o registrate:
+    </p>
+
+    <div class="mt-3">
+        <a href="{% url 'blog:login' %}" class="btn btn-lg mx-2" style="background-color:#c9e8d2; color:#254229;">
+            Iniciar sesión
+        </a>
+        <a href="{% url 'blog:registro' %}" class="btn btn-lg mx-2" style="background-color:#c9e8d2; color:#254229;">
+            Registrarse
+        </a>
+    </div>
+
+    <div class="row justify-content-center mt-5 g-4">
+
+        <div class="col-md-5">
+            <div class="card shadow-sm border-0 rounded-3 overflow-hidden">
+                <img 
+                    src="{% static 'blog/vinilo2.jpg' %}" 
+                    alt="Vinilos"
+                    class="img-fluid"
+                    style="height:300px; object-fit:cover;"
+                >
+                <div class="card-body text-center text-muted">
+                    Colección curada de vinilos
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-5">
+            <div class="card shadow-sm border-0 rounded-3 overflow-hidden">
+                <img 
+                    src="{% static 'blog/vinilo3.jpg' %}" 
+                    alt="Vinilos"
+                    class="img-fluid"
+                    style="height:300px; object-fit:cover;"
+                >
+                <div class="card-body text-center text-muted">
+                    Calidad y nostalgia en cada disco
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+{% else %}
+
+<div class="text-center mt-5">
+    <a href="/post/list" class="btn btn-info btn-lg">
+        Ingresar al blog
+    </a>
+</div>
+
+{% endif %}
+
+{% endblock content %}

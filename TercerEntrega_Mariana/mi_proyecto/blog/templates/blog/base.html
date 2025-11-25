@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | {% block title %}{% endblock title %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+    <style>
+        .navbar-pastel {
+            background-color: #ffd6d6; /* rosa pastel */
+        }
+        .navbar-pastel .nav-link,
+        .navbar-pastel .navbar-brand,
+        .navbar-pastel button.nav-link {
+            color: #333333; /* texto oscuro para contraste */
+        }
+        .navbar-pastel .nav-link:hover,
+        .navbar-pastel .navbar-brand:hover {
+            color: #000000; /* efecto hover */
+        }
+        .navbar-pastel .navbar-toggler-icon {
+            filter: invert(50%); /* para que el icono sea visible sobre pastel */
+        }
+    </style>
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-pastel shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="{% url 'blog:index' %}">Vinland</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Alternar navegación">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="mainNav">
+                <ul class="navbar-nav ms-auto gap-2">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'blog:index' %}">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'blog:about' %}">About</a>
+                    </li>
+
+                    {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <form action="{% url 'blog:logout' %}" method="post" style="display:inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="nav-link btn btn-link">Logout</button>
+                            </form>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'blog:post_list' %}">Blog</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'blog:login' %}">Iniciar sesión</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'blog:registro' %}">Registrarse</a></li>
+                        
+                    {% endif %}
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'blog:editar_perfil' %}">
+                            {% if user.avatar.imagen %}
+                                <img src="{{ user.avatar.imagen.url }}" alt="Avatar" class="rounded-circle" style="width:30px; height:30px;">
+                            {% endif %}{{ user.username }}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <main class="container py-5">
+        <h1 class="display-5 fw-semibold text-center mb-4">
+            {% block content_title %}
+            {% endblock content_title %}
+        </h1>
+
+        {% block content %}
+        {% endblock content %}
+    </main>
+  
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+</body>
+</html>

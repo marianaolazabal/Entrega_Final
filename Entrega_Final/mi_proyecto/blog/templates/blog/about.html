@@ -1,0 +1,98 @@
+{% extends "blog/base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<style>
+    /* Redes sociales */
+    .social-links li a {
+        color: #f5a623; /* naranja pastel más visible */
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s ease;
+    }
+
+    .social-links li a:hover {
+        color: #d48806; /* tono más oscuro al pasar el mouse */
+    }
+
+    .social-links li i {
+        color: #f5a623; /* mismo color que el link */
+        margin-right: 8px;
+        font-size: 1.2rem; /* iconos más grandes */
+        vertical-align: middle;
+        transition: transform 0.3s ease;
+    }
+
+    .social-links li:hover i {
+        transform: scale(1.2); /* efecto de zoom al pasar el mouse */
+    }
+</style>
+{% endblock extra_css %}
+
+
+{% block title %} Sobre este sitio {% endblock %}
+
+{% block content_title %}
+    Sobre Vinland
+{% endblock content_title %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="row g-4 align-items-center">
+
+        <!-- Texto -->
+        <div class="col-12 col-md-7">
+            <p class="fs-5 fw-light">
+                Bienvenidos a <strong>Vinland</strong>, nuestra tienda de discos de vinilo. 
+                Nuestro objetivo es ofrecer una experiencia auténtica para los amantes de la música, 
+                recuperando la magia del vinilo en cada álbum.
+            </p>
+
+            <p class="fs-5 fw-light">
+                Somos una empresa familiar fundada a principios de los 2000, pioneros en la venta online 
+                de vinilos en nuestra región. Nos mueve la pasión por la música y el deseo de compartirla 
+                con melómanos de todo el país.
+            </p>
+
+            <p class="fs-6">
+                Si buscas un álbum para tu colección o un regalo especial, estamos aquí para ayudarte.  
+                Síguenos en redes:
+            </p>
+
+            <ul class="list-unstyled fs-6 ms-3 social-links">
+                <li>
+                    <i class="bi bi-instagram"></i>
+                    <a href="https://www.instagram.com/tu_tienda_de_vinilos" target="_blank">Instagram: @vinland</a>
+                </li>
+                <li>
+                    <i class="bi bi-facebook"></i>
+                    <a href="https://www.facebook.com/tu_tienda_de_vinilos" target="_blank">Facebook: vinland_face</a>
+                </li>
+                <li>
+                    <i class="bi bi-twitter"></i>
+                    <a href="https://twitter.com/tu_tienda_de_vinilos" target="_blank">Twitter: @vinland_music</a>
+                </li>
+            </ul>
+
+        </div>
+
+        <!-- Imagen -->
+        <div class="col-12 col-md-5">
+            <div class="card shadow-sm border-0 rounded-3 overflow-hidden">
+                <img 
+                    src="{% static 'blog/vinilos.jpg' %}" 
+                    alt="Colección de vinilos"
+                    class="img-fluid"
+                    style="height:300px; object-fit:cover;"
+                    loading="lazy"
+                    onerror="this.onerror=null;this.src='https://via.placeholder.com/800x300?text=Imagen+no+disponible';"
+                >
+                <div class="card-body text-center text-muted fs-7">
+                    Colección curada de vinilos — calidad y nostalgia en cada disco
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock content %}

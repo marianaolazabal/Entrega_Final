@@ -1,0 +1,45 @@
+{% extends "blog/base.html" %}
+{% block title %}
+    <h2 class="text-center" style="color:#254229; font-weight:700; border-bottom:2px solid #c9e8d2; display:inline-block; padding-bottom:6px;">
+        Publicar
+    </h2>
+{% endblock title %}
+
+
+
+{% block content_title %}
+    <h2 class="text-center" style="color:#254229; font-weight:600;">
+        {% if form.instance.pk %} Editar Publicación {% else %} Crear Nueva Publicación {% endif %}
+    </h2>
+{% endblock content_title %}
+
+{% block content %}
+
+<div class="container d-flex justify-content-center">
+    <div class="card shadow-sm mt-4 p-4" style="max-width: 600px; width: 100%;">
+
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                {{ form.as_p }}
+            </div>
+
+            <div class="d-flex gap-2 mt-4">
+                <button type="submit"
+                        class="btn w-100"
+                        style="background-color:#c9e8d2; color:#254229; font-weight:500;">
+                    Guardar
+                </button>
+
+                <a href="{% url 'blog:post_list' %}"
+                   class="btn btn-secondary w-100">
+                    Cancelar
+                </a>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+{% endblock content %}

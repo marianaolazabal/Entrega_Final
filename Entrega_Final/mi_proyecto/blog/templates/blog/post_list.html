@@ -1,0 +1,96 @@
+{% extends "blog/base.html" %}
+{% block title %} Publicaciones {% endblock %}
+
+{% block content_title %}
+    <h2 class="text-center" style="color:#254229; font-weight:600;">
+        Lista de publicaciones
+    </h2>
+{% endblock content_title %}
+
+{% block content %}
+
+<div class="container mb-4">
+
+    <!-- Botón Crear -->
+    <div class="text-end mb-3">
+        <a href="{% url 'blog:post_form' %}"
+           class="btn"
+           style="background-color:#c9e8d2; color:#254229; font-weight:500;">
+            Crear nueva publicación
+        </a>
+    </div>
+
+    <!-- Buscador -->
+    <form action="{% url 'blog:post_list' %}" method="get" class="mb-4">
+        <div class="input-group">
+            <input type="text"
+                   name="busqueda"
+                   class="form-control"
+                   placeholder="Buscar por título...">
+            <button class="btn"
+                    style="background-color:#c9e8d2; color:#254229; font-weight:500;"
+                    type="submit">
+                Buscar
+            </button>
+        </div>
+    </form>
+
+    <!-- Tabla de Posts -->
+    <div class="table-responsive">
+        <table class="table table-hover align-middle">
+
+            <thead style="background-color:#c9e8d2; color:#254229;">
+                <tr>
+                    <th>Título</th>
+                    <th>Autor</th>
+                    <th>Fecha de publicación</th>
+                    <th>Estado</th>
+                    <th class="text-center">Acciones</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for post in posts %}
+                <tr>
+                    <td>{{ post.titulo }}</td>
+                    <td>{{ post.autor }}</td>
+                    <td>{{ post.fecha_publicacion }}</td>
+
+                    {% if post.estado == "B" %}
+                        <td><span class="badge bg-secondary">Borrador</span></td>
+                    {% else %}
+                        <td><span class="badge bg-success">Publicado</span></td>
+                    {% endif %}
+
+                    <td class="text-center">
+                        <a href="{% url 'blog:post_detail' post.id %}"
+                        class="btn btn-sm btn-info">
+                            Ver
+                        </a>
+                        <a href="{% url 'blog:post_update' post.id %}"
+                        class="btn btn-sm btn-warning">
+                            Editar
+                        </a>
+                        <a href="{% url 'blog:post_delete' post.id %}"
+                        class="btn btn-sm btn-danger">
+                            Eliminar
+                        </a>
+                    </td>
+                </tr>
+
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="text-center text-muted">
+                        No se encontraron posts
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+
+        </table>
+    </div>
+
+</div>
+
+{% endblock content %}
